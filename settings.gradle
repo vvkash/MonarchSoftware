@@ -1,0 +1,2 @@
+rootProject.name = "MonarchSoftware"
+include ':app'

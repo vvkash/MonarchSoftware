@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F6F4F0"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="DATA EXPORT"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        android:textColor="#D4A843"
+        android:paddingBottom="4dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Exports keystroke and swipe session data as CSV files. Use the share sheet to send to email, Drive, etc."
+        android:textSize="13sp"
+        android:textColor="#6B7280"
+        android:paddingBottom="16dp"/>
+
+    <!-- Participant ID -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Participant ID"
+        android:textSize="12sp"
+        android:textColor="#424242"
+        android:paddingBottom="4dp"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="16dp">
+
+        <EditText
+            android:id="@+id/et_participant_id"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="e.g. P01"
+            android:inputType="text"
+            android:maxLines="1"
+            android:background="@android:drawable/edit_text"/>
+
+        <Button
+            android:id="@+id/btn_save_pid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Save"
+            android:backgroundTint="#12111A"
+            android:textColor="#FFFFFF"/>
+    </LinearLayout>
+
+    <!-- Export buttons -->
+    <Button
+        android:id="@+id/btn_export_typing"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="Share Typing Study CSV"
+        android:backgroundTint="#1565C0"
+        android:textColor="#FFFFFF"/>
+
+    <Button
+        android:id="@+id/btn_export_swipe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="Share Swipe Study CSV"
+        android:backgroundTint="#1565C0"
+        android:textColor="#FFFFFF"/>
+
+    <Button
+        android:id="@+id/btn_export_both"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="Share Both CSV Files"
+        android:backgroundTint="#D4A843"
+        android:textColor="#FFFFFF"/>
+
+    <!-- Status -->
+    <TextView
+        android:id="@+id/tv_export_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:textColor="#424242"/>
+
+</LinearLayout>

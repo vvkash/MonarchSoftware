@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F6F4F0">
+
+    <!-- Summary header -->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#12111A"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="SWIPE STUDY RESULTS"
+            android:textSize="11sp"
+            android:textColor="#90CAF9"
+            android:letterSpacing="0.1"
+            android:paddingBottom="8dp"/>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center">
+                <TextView
+                    android:id="@+id/tv_total_strokes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-"
+                    android:textSize="28sp"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="STROKES"
+                    android:textSize="11sp"
+                    android:textColor="#BDB08A"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center">
+                <TextView
+                    android:id="@+id/tv_avg_duration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-"
+                    android:textSize="28sp"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="AVG ms"
+                    android:textSize="11sp"
+                    android:textColor="#BDB08A"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center">
+                <TextView
+                    android:id="@+id/tv_avg_points"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-"
+                    android:textSize="28sp"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="AVG PTS"
+                    android:textSize="11sp"
+                    android:textColor="#BDB08A"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Per-stroke list -->
+    <ListView
+        android:id="@+id/lv_swipe_results"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:divider="@null"
+        android:background="#F5F5F5"/>
+
+</LinearLayout>

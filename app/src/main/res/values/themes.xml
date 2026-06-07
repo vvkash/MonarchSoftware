@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.MonarchSoftware" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/monarch_green</item>
+        <item name="colorPrimaryVariant">@color/monarch_green_dark</item>
+        <item name="colorAccent">@color/monarch_green_light</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="android:windowBackground">@color/off_white</item>
+        <item name="android:statusBarColor">@color/monarch_green_dark</item>
+    </style>
+
+    <!-- Theme with action bar for Keystroke PIN screen -->
+    <style name="Theme.MonarchSoftware.ActionBar" parent="Theme.MaterialComponents.Light">
+        <item name="colorPrimary">@color/monarch_green</item>
+        <item name="colorPrimaryVariant">@color/monarch_green_dark</item>
+        <item name="colorAccent">@color/monarch_green_light</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="android:statusBarColor">@color/monarch_green_dark</item>
+    </style>
+
+    <!-- Legacy alias used by Phase2Study layouts -->
+    <style name="Theme.Phase2Study" parent="Theme.MonarchSoftware"/>
+
+    <!-- AppBar overlay for Keystroke PIN screen toolbar -->
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar"/>
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light"/>
+
+    <!-- Biometrics form styles -->
+    <style name="parent">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="modifiedEditText" parent="parent">
+        <item name="android:textSize">@dimen/newsMoreTextSize</item>
+    </style>
+
+    <style name="loginButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/button_background_blue</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="SaveButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/save_background_blue</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+</resources>

@@ -1,0 +1,449 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/surface_variant">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Hero header -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/primary"
+            android:orientation="vertical"
+            android:padding="24dp"
+            android:paddingTop="48dp"
+            android:paddingBottom="32dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="MONARCH"
+                android:textSize="11sp"
+                android:textColor="#BDB08A"
+                android:letterSpacing="0.15"
+                android:paddingBottom="4dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Daily Tasks"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Complete both tasks to finish today&#8217;s session."
+                android:textSize="14sp"
+                android:textColor="#BDB08A"
+                android:paddingTop="6dp"/>
+
+            <!-- Progress chips -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp">
+
+                <TextView
+                    android:id="@+id/tv_tasks_done"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0 / 2 done"
+                    android:textSize="13sp"
+                    android:textColor="#FFFFFF"
+                    android:background="@drawable/chip_bg"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"/>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Cards section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Social Media Task Card -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp"
+                app:cardBackgroundColor="@color/surface"
+                xmlns:app="http://schemas.android.com/apk/res-auto">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <!-- Icon + label row -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:paddingBottom="12dp">
+
+                        <TextView
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:text="📱"
+                            android:textSize="24sp"
+                            android:gravity="center"
+                            android:background="@drawable/icon_bg_pink"
+                            android:layout_marginEnd="14dp"/>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Task 1"
+                                android:textSize="11sp"
+                                android:textColor="@color/accent"
+                                android:textStyle="bold"
+                                android:letterSpacing="0.08"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Social Media Feed"
+                                android:textSize="18sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/text_primary"/>
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/tv_social_status"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Pending"
+                            android:textSize="11sp"
+                            android:textColor="@color/text_secondary"
+                            android:background="@drawable/chip_bg_gray"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp"
+                            android:paddingTop="4dp"
+                            android:paddingBottom="4dp"/>
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Scroll through a social media feed of 20 posts and find the one matching the given description. Complete 5 trials."
+                        android:textSize="13sp"
+                        android:textColor="@color/text_secondary"
+                        android:lineSpacingExtra="3dp"
+                        android:paddingBottom="16dp"/>
+
+                    <!-- Stats row -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingBottom="16dp">
+
+                        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                            android:layout_weight="1" android:orientation="vertical" android:gravity="center">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                android:text="20" android:textSize="20sp" android:textStyle="bold"
+                                android:textColor="@color/text_primary"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                android:text="Posts" android:textSize="11sp" android:textColor="@color/text_secondary"/>
+                        </LinearLayout>
+
+                        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                            android:layout_weight="1" android:orientation="vertical" android:gravity="center">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                android:text="5" android:textSize="20sp" android:textStyle="bold"
+                                android:textColor="@color/text_primary"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                android:text="Trials" android:textSize="11sp" android:textColor="@color/text_secondary"/>
+                        </LinearLayout>
+
+                        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                            android:layout_weight="1" android:orientation="vertical" android:gravity="center">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                android:text="~5" android:textSize="20sp" android:textStyle="bold"
+                                android:textColor="@color/text_primary"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                android:text="Minutes" android:textSize="11sp" android:textColor="@color/text_secondary"/>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_start_social"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:text="Start Task"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:backgroundTint="#12111A"
+                        app:cornerRadius="12dp"
+                        xmlns:app="http://schemas.android.com/apk/res-auto"/>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Image Gallery Task Card -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp"
+                app:cardBackgroundColor="@color/surface"
+                xmlns:app="http://schemas.android.com/apk/res-auto">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:paddingBottom="12dp">
+
+                        <TextView
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:text="🖼️"
+                            android:textSize="24sp"
+                            android:gravity="center"
+                            android:background="@drawable/icon_bg_blue"
+                            android:layout_marginEnd="14dp"/>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Task 2"
+                                android:textSize="11sp"
+                                android:textColor="@color/accent"
+                                android:textStyle="bold"
+                                android:letterSpacing="0.08"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Image Gallery"
+                                android:textSize="18sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/text_primary"/>
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/tv_gallery_status"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Pending"
+                            android:textSize="11sp"
+                            android:textColor="@color/text_secondary"
+                            android:background="@drawable/chip_bg_gray"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp"
+                            android:paddingTop="4dp"
+                            android:paddingBottom="4dp"/>
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Swipe through a gallery of 20 images and count how many times the target object appears. Complete 5 trials."
+                        android:textSize="13sp"
+                        android:textColor="@color/text_secondary"
+                        android:lineSpacingExtra="3dp"
+                        android:paddingBottom="16dp"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingBottom="16dp">
+
+                        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                            android:layout_weight="1" android:orientation="vertical" android:gravity="center">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                android:text="20" android:textSize="20sp" android:textStyle="bold"
+                                android:textColor="@color/text_primary"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                android:text="Images" android:textSize="11sp" android:textColor="@color/text_secondary"/>
+                        </LinearLayout>
+
+                        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                            android:layout_weight="1" android:orientation="vertical" android:gravity="center">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                android:text="5" android:textSize="20sp" android:textStyle="bold"
+                                android:textColor="@color/text_primary"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                android:text="Trials" android:textSize="11sp" android:textColor="@color/text_secondary"/>
+                        </LinearLayout>
+
+                        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                            android:layout_weight="1" android:orientation="vertical" android:gravity="center">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                android:text="~5" android:textSize="20sp" android:textStyle="bold"
+                                android:textColor="@color/text_primary"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                android:text="Minutes" android:textSize="11sp" android:textColor="@color/text_secondary"/>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_start_gallery"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:text="Start Task"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:backgroundTint="#D4A843"
+                        app:cornerRadius="12dp"
+                        xmlns:app="http://schemas.android.com/apk/res-auto"/>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Daily Feed Card -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp"
+                app:cardBackgroundColor="@color/surface"
+                xmlns:app="http://schemas.android.com/apk/res-auto">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:paddingBottom="12dp">
+
+                        <TextView
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:text="📲"
+                            android:textSize="24sp"
+                            android:gravity="center"
+                            android:background="@drawable/icon_bg_pink"
+                            android:layout_marginEnd="14dp"/>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Daily"
+                                android:textSize="11sp"
+                                android:textColor="@color/accent"
+                                android:textStyle="bold"
+                                android:letterSpacing="0.08"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Social Feed"
+                                android:textSize="18sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/text_primary"/>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Browse today's feed of posts from people you follow. New posts and users every day. Double-tap to like."
+                        android:textSize="13sp"
+                        android:textColor="@color/text_secondary"
+                        android:lineSpacingExtra="3dp"
+                        android:paddingBottom="16dp"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingBottom="16dp">
+
+                        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                            android:layout_weight="1" android:orientation="vertical" android:gravity="center">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                android:text="30" android:textSize="20sp" android:textStyle="bold"
+                                android:textColor="@color/text_primary"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                android:text="Posts" android:textSize="11sp" android:textColor="@color/text_secondary"/>
+                        </LinearLayout>
+
+                        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                            android:layout_weight="1" android:orientation="vertical" android:gravity="center">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                android:text="40" android:textSize="20sp" android:textStyle="bold"
+                                android:textColor="@color/text_primary"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                android:text="Users" android:textSize="11sp" android:textColor="@color/text_secondary"/>
+                        </LinearLayout>
+
+                        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                            android:layout_weight="1" android:orientation="vertical" android:gravity="center">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                android:text="Daily" android:textSize="20sp" android:textStyle="bold"
+                                android:textColor="@color/text_primary"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                android:text="Refresh" android:textSize="11sp" android:textColor="@color/text_secondary"/>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_open_feed"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:text="Open Feed"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:backgroundTint="#12111A"
+                        app:cornerRadius="12dp"
+                        xmlns:app="http://schemas.android.com/apk/res-auto"/>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

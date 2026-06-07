@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#12111A">
+
+    <!-- ── Header ── -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:gravity="center_vertical"
+        android:paddingStart="4dp"
+        android:paddingEnd="16dp">
+
+        <TextView
+            android:id="@+id/tv_back"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:text="←"
+            android:textSize="24sp"
+            android:textColor="#FFFFFF"
+            android:gravity="center"
+            android:padding="8dp"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Comments"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:gravity="center"/>
+
+        <!-- spacer to balance back button -->
+        <View
+            android:layout_width="48dp"
+            android:layout_height="1dp"/>
+
+    </LinearLayout>
+
+    <!-- ── Divider ── -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#252535"/>
+
+    <!-- ── Post preview strip ── -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:gravity="center_vertical">
+
+        <!-- Thumbnail -->
+        <FrameLayout
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="12dp">
+
+            <View
+                android:id="@+id/view_post_color_preview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+            <TextView
+                android:id="@+id/tv_post_emoji_preview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="24sp"
+                android:gravity="center"/>
+
+        </FrameLayout>
+
+        <!-- Caption + handle -->
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tv_post_handle_preview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"/>
+
+            <TextView
+                android:id="@+id/tv_post_caption_preview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textColor="#8A8A9A"
+                android:maxLines="2"
+                android:ellipsize="end"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- ── Divider ── -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#252535"/>
+
+    <!-- ── Comments list ── -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_comments"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:clipToPadding="false"
+        android:paddingBottom="8dp"/>
+
+    <!-- ── Divider ── -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#252535"/>
+
+    <!-- ── Input bar ── -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:gravity="center_vertical"
+        android:background="#1A1929">
+
+        <!-- "You" avatar -->
+        <TextView
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:text="😊"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:background="@drawable/circle_bg_purple"
+            android:layout_marginEnd="10dp"/>
+
+        <EditText
+            android:id="@+id/et_comment_input"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Add a comment…"
+            android:textColorHint="#6B6B7A"
+            android:textColor="#EEEEEE"
+            android:textSize="14sp"
+            android:background="@null"
+            android:imeOptions="actionSend"
+            android:inputType="textMultiLine|textCapSentences"
+            android:maxLines="4"/>
+
+        <TextView
+            android:id="@+id/tv_post_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Post"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="#D4A843"
+            android:padding="8dp"/>
+
+    </LinearLayout>
+
+</LinearLayout>

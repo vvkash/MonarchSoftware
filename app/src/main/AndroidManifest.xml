@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Network (OkHttp for ThingSpeak calls in Keystroke neural net) -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- Foreground services -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_HEALTH" />
+
+    <!-- High-rate IMU sensors -->
+    <uses-permission android:name="android.permission.HIGH_SAMPLING_RATE_SENSORS" />
+
+    <!-- Vibration for alerts -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.MonarchSoftware">
+
+        <!-- Monarch home screen -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Keystroke Dynamics module -->
+        <activity
+            android:name=".keystroke.KeystrokeHomeActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".keystroke.KeystrokeMainActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MonarchSoftware.ActionBar"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".keystroke.ShowValuesActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".keystroke.ShowWeightsActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".keystroke.TypingStudyActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".keystroke.TypingResultsActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".keystroke.SwipeStudyActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".keystroke.SwipeResultsActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".keystroke.ExportActivity"
+            android:exported="false" />
+
+        <service
+            android:name=".keystroke.KeystrokeSensorService"
+            android:exported="false"
+            android:foregroundServiceType="specialUse">
+            <property
+                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="IMU sensor recording for keystroke and swipe studies" />
+        </service>
+
+        <!-- Behavioral Biometrics Collection module -->
+        <activity
+            android:name=".biometrics.BiometricsRegisterActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".biometrics.BiometricsMainActivity"
+            android:exported="false" />
+
+        <service
+            android:name=".biometrics.BiometricsSensorService"
+            android:exported="false"
+            android:foregroundServiceType="health" />
+
+        <!-- Social Interaction Study module -->
+        <activity
+            android:name=".phase2.Phase2HomeActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".phase2.SocialMediaActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".phase2.ImageGalleryActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".phase2.InstaFeedActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".phase2.CommentsActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- Shared FileProvider for CSV sharing -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.monarch.software.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+    </application>
+
+</manifest>

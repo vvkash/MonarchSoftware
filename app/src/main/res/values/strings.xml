@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Monarch Software</string>
+
+    <!-- Monarch Home -->
+    <string name="module_keystroke_title">Keystroke Dynamics</string>
+    <string name="module_keystroke_desc">PIN authentication, typing study, and swipe study</string>
+    <string name="module_biometrics_title">Behavioral Biometrics Collection</string>
+    <string name="module_biometrics_desc">IMU sensor data recording across activity scenarios</string>
+    <string name="module_social_title">Social Interaction Study</string>
+    <string name="module_social_desc">Feed engagement, image gallery, and social media tasks</string>
+
+    <!-- Biometrics scenarios -->
+    <string-array name="scenarios">
+        <item>Walking</item>
+        <item>Running</item>
+        <item>Biking</item>
+        <item>Sitting</item>
+        <item>Standing</item>
+        <item>Lying Down</item>
+    </string-array>
+</resources>

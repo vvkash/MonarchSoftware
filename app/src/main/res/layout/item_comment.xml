@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="12dp"
+    android:paddingStart="14dp"
+    android:paddingEnd="14dp">
+
+    <!-- ── Comment row ── -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="top">
+
+        <!-- Avatar -->
+        <TextView
+            android:id="@+id/tv_comment_avatar"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="2dp"/>
+
+        <!-- Content -->
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <!-- Handle + text -->
+            <com.google.android.flexbox.FlexboxLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:flexWrap="wrap">
+
+                <TextView
+                    android:id="@+id/tv_comment_handle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    android:layout_marginEnd="6dp"/>
+
+                <TextView
+                    android:id="@+id/tv_comment_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="13sp"
+                    android:textColor="#DDDDDD"/>
+
+            </com.google.android.flexbox.FlexboxLayout>
+
+            <!-- Time + Reply -->
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_marginTop="4dp">
+
+                <TextView
+                    android:id="@+id/tv_comment_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="11sp"
+                    android:textColor="#6B6B7A"
+                    android:layout_marginEnd="14dp"/>
+
+                <TextView
+                    android:id="@+id/tv_comment_like_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="11sp"
+                    android:textColor="#6B6B7A"
+                    android:layout_marginEnd="4dp"/>
+
+                <TextView
+                    android:id="@+id/tv_comment_reply"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Reply"
+                    android:textSize="11sp"
+                    android:textColor="#6B6B7A"
+                    android:textStyle="bold"
+                    android:padding="4dp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Like button (right side) -->
+        <TextView
+            android:id="@+id/tv_comment_like"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:text="♡"
+            android:textSize="16sp"
+            android:textColor="#8A8A9A"
+            android:gravity="center"
+            android:layout_marginTop="2dp"/>
+
+    </LinearLayout>
+
+    <!-- ── Replies (indented) ── -->
+    <LinearLayout
+        android:id="@+id/ll_replies"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="46dp"
+        android:layout_marginTop="4dp"/>
+
+    <!-- ── Bottom padding ── -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="4dp"/>
+
+</LinearLayout>

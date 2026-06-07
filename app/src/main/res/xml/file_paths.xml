@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- For Keystroke data CSV exports -->
+    <cache-path name="exports" path="exports/" />
+    <!-- For Biometrics CSV exports stored via openFileOutput() -->
+    <files-path name="biometrics_data" path="." />
+</paths>

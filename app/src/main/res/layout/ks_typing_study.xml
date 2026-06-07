@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="#F6F4F0">
+
+    <!-- Progress indicator -->
+    <TextView
+        android:id="@+id/tv_progress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sentence 1 of 20"
+        android:textSize="13sp"
+        android:textColor="#6B7280"
+        android:gravity="center"
+        android:paddingBottom="12dp"/>
+
+    <!-- Instruction label -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TYPE THE TEXT BELOW"
+        android:textSize="11sp"
+        android:textColor="#BDB08A"
+        android:letterSpacing="0.1"
+        android:paddingBottom="6dp"/>
+
+    <!-- Reference sentence with per-character highlight -->
+    <TextView
+        android:id="@+id/tv_reference"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="14dp"
+        android:textSize="22sp"
+        android:textColor="#12111A"
+        android:background="#EEEBE4"
+        android:layout_marginBottom="20dp"
+        android:lineSpacingExtra="4dp"
+        android:fontFamily="monospace"/>
+
+    <!-- User typing field -->
+    <EditText
+        android:id="@+id/et_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Start typing here…"
+        android:textSize="20sp"
+        android:fontFamily="monospace"
+        android:inputType="textNoSuggestions|textVisiblePassword"
+        android:imeOptions="flagNoExtractUi"
+        android:privateImeOptions="nm"
+        android:padding="10dp"
+        android:layout_marginBottom="16dp"
+        android:background="@android:drawable/edit_text"/>
+
+    <!-- Live stats row -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center">
+            <TextView
+                android:id="@+id/tv_wpm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="-"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="#D4A843"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="WPM"
+                android:textSize="11sp"
+                android:textColor="#6B7280"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center">
+            <TextView
+                android:id="@+id/tv_errors"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="-"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="#C62828"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ERRORS"
+                android:textSize="11sp"
+                android:textColor="#6B7280"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center">
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="-"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="#2E7D32"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SEC"
+                android:textSize="11sp"
+                android:textColor="#6B7280"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_next"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Next Sentence →"
+        android:enabled="false"
+        android:layout_marginBottom="8dp"/>
+
+    <Button
+        android:id="@+id/btn_done"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Finish Session"
+        android:visibility="gone"/>
+
+</LinearLayout>

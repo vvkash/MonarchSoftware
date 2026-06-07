@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/keystroke"
+        android:orderInCategory="100"
+        android:title="Keystroke Data" />
+    <item
+        android:id="@+id/weight"
+        android:orderInCategory="100"
+        android:title="Weight Values" />
+    <item
+        android:id="@+id/typing_study"
+        android:orderInCategory="100"
+        android:title="Typing Study" />
+    <item
+        android:id="@+id/typing_results"
+        android:orderInCategory="100"
+        android:title="Typing Results" />
+    <item
+        android:id="@+id/swipe_study"
+        android:orderInCategory="100"
+        android:title="Swipe Study" />
+    <item
+        android:id="@+id/swipe_results"
+        android:orderInCategory="100"
+        android:title="Swipe Results" />
+    <item
+        android:id="@+id/export_data"
+        android:orderInCategory="200"
+        android:title="Export Data" />
+    <item
+        android:id="@+id/reset_auth"
+        android:orderInCategory="300"
+        android:title="Restart Auth" />
+</menu>

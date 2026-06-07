@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Monarch primary palette: green + white -->
+    <color name="monarch_green">#1B5E20</color>
+    <color name="monarch_green_dark">#145A32</color>
+    <color name="monarch_green_medium">#2E7D32</color>
+    <color name="monarch_green_light">#4CAF50</color>
+    <color name="monarch_green_pale">#E8F5E9</color>
+    <color name="monarch_green_card">#F1F8E9</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="off_white">#FAFAFA</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="surface_variant">#F5F5F5</color>
+
+    <color name="text_primary">#212121</color>
+    <color name="text_secondary">#757575</color>
+    <color name="text_hint">#9E9E9E</color>
+    <color name="text_on_green">#FFFFFF</color>
+
+    <color name="divider">#E0E0E0</color>
+    <color name="border">#C8E6C9</color>
+
+    <color name="error">#B71C1C</color>
+    <color name="error_bg">#FFCDD2</color>
+    <color name="success">#2E7D32</color>
+    <color name="warning">#F57F17</color>
+
+    <!-- Legacy references (Phase2Study layouts) -->
+    <color name="primary">#1B5E20</color>
+    <color name="primary_variant">#145A32</color>
+    <color name="accent">#4CAF50</color>
+    <color name="accent_light">#81C784</color>
+    <color name="on_primary">#FFFFFF</color>
+    <color name="tag_bg">#E8F5E9</color>
+    <color name="tag_text">#2E7D32</color>
+    <color name="text_light">#FFFFFF</color>
+
+    <!-- Biometrics layout legacy colors -->
+    <color name="register_bk_color">#1B5E20</color>
+    <color name="whiteTextColor">#FFFFFF</color>
+
+    <!-- Gallery object colors (Phase2 image gallery) -->
+    <color name="obj_dog">#FF8F00</color>
+    <color name="obj_cat">#00897B</color>
+    <color name="obj_pizza">#F4511E</color>
+    <color name="obj_bicycle">#1E88E5</color>
+    <color name="obj_apple">#E53935</color>
+    <color name="obj_car">#546E7A</color>
+    <color name="obj_bird">#039BE5</color>
+    <color name="obj_book">#6D4C41</color>
+    <color name="obj_flower">#D81B60</color>
+    <color name="obj_house">#43A047</color>
+</resources>
