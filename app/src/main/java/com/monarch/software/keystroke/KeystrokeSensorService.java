@@ -1,5 +1,7 @@
 package com.monarch.software.keystroke;
 
+import com.monarch.software.R;
+
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;

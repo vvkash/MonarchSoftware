@@ -2,6 +2,8 @@
 
 package com.monarch.software.keystroke;
 
+import com.monarch.software.R;
+
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;

@@ -90,31 +90,17 @@ public class errorBackPropagation {
     }
     public void functionHiddenLayer(){
         for(int i=0;i<input_hidden_layer.length;i++){
-            //input_hidden_layer[i]=bias_hidden[i];
             for(int j=0;j<input_layer.length;j++){
                 input_hidden_layer[i]+=input_layer[j]*weight_input_to_hidden[j][i];
             }
             hidden_layer[i]=activationFunction(input_hidden_layer[i],i);
-            if(i == 0){
-                /*Toast.makeText(con, "Input Layer : "+input_hidden_layer[i] + "", Toast.LENGTH_SHORT).show();
-                Toast.makeText(con, "Hidden : "+hidden_layer[i] + "", Toast.LENGTH_SHORT).show();
-                */
-                Log.e("Input Layer  : ", input_hidden_layer[i] +"");
-                Log.e("Input Layer  : ", hidden_layer[i] + "");
-            }
-
-
         }
     }
     public void functionOutputLayer(){
         for(int i=0;i<input_output_layer.length;i++){
-            //input_output_layer[i]=bias_output[i];
             for(int j=0;j<hidden_layer.length;j++){
                 input_output_layer[i]+=hidden_layer[j]*weight_hidden_to_output[j][i];
-                Log.e("Hid",  hidden_layer[j]+"");
-                Log.e("We Op",  weight_hidden_to_output[j][i]+"");
             }
-            Log.e("Ip to Op Layer", input_output_layer[i] +"");
             output_layer[i]=activationFunction(input_output_layer[i],i);
             /*if(i==0) {
                 Toast.makeText(con, activationFunction(5.5, i) + "", Toast.LENGTH_SHORT).show();

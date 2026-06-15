@@ -10,7 +10,7 @@
     </style>
 
     <!-- Theme with action bar for Keystroke PIN screen -->
-    <style name="Theme.MonarchSoftware.ActionBar" parent="Theme.MaterialComponents.Light">
+    <style name="Theme.MonarchSoftware.ActionBar" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/monarch_green</item>
         <item name="colorPrimaryVariant">@color/monarch_green_dark</item>
         <item name="colorAccent">@color/monarch_green_light</item>

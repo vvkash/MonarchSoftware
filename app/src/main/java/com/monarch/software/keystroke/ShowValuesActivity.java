@@ -1,5 +1,7 @@
 package com.monarch.software.keystroke;
 
+import com.monarch.software.R;
+
 
 import android.content.Intent;
 import android.database.Cursor;

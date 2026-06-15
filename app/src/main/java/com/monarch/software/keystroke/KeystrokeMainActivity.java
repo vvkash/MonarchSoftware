@@ -1,5 +1,7 @@
 package com.monarch.software.keystroke;
 
+import com.monarch.software.R;
+
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -599,13 +601,17 @@ public class KeystrokeMainActivity extends AppCompatActivity {
 
                         Cursor cur = mydatabase.rawQuery("SELECT * from " + Database.TABLE_NAME, null);
                         int count = cur.getCount();
+                        cur.close();
                         Cursor cur_training = mydatabase.rawQuery("SELECT * from " + Database.TRAINING_TABLE_NAME, null);
                         int count_training = cur_training.getCount();
+                        cur_training.close();
                         String col[] = new String[]{Database.TRAINING_STATUS};
                         Cursor c = mydatabase.query(Database.TRAINING_TABLE_NAME, col, null, null, null, null, null);
-                        c.moveToLast();
-                        int stat = Integer.parseInt(c.getString(0));
-
+                        int stat = 0;
+                        if (c.moveToLast()) {
+                            stat = Integer.parseInt(c.getString(0));
+                        }
+                        c.close();
 
                         if(count_training < 31 || stat == 0) {
                             if (count < 30) {
@@ -652,14 +658,32 @@ public class KeystrokeMainActivity extends AppCompatActivity {
                                 initialiseVariables();
                             } else {
                                 attempt.setText("Testing Phase ");
-                                startTesting();
-                                initialiseVariables();
+                                mProgressDialog = new ProgressDialog(KeystrokeMainActivity.this);
+                                mProgressDialog.setCancelable(false);
+                                mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                                mProgressDialog.setMessage("Authenticating…");
+                                mProgressDialog.show();
+                                new Thread(() -> {
+                                    boolean result = runTesting();
+                                    runOnUiThread(() -> {
+                                        mProgressDialog.dismiss();
+                                        if (result) {
+                                            right_wrong.setTextColor(Color.parseColor("#4CAF50"));
+                                            right_wrong.setText("ACCESS GRANTED");
+                                        } else {
+                                            right_wrong.setTextColor(Color.RED);
+                                            right_wrong.setText("ACCESS DENIED");
+                                        }
+                                        initialiseVariables();
+                                    });
+                                }).start();
                             }
                         }
 
                     } else {
                         Cursor cur = mydatabase.rawQuery("SELECT * from " + Database.TABLE_NAME, null);
                         int count = cur.getCount();
+                        cur.close();
                         Toast.makeText(KeystrokeMainActivity.this, "Invalid Password", Toast.LENGTH_SHORT).show();
                         initialiseVariables();
                         right_wrong.setTextColor(Color.RED);
@@ -685,9 +709,8 @@ public class KeystrokeMainActivity extends AppCompatActivity {
 
     }
 
-    private void startTesting() {
+    private boolean runTesting() {
         errorBackPropagation e = new errorBackPropagation(KeystrokeMainActivity.this);
-
         e.initialiseHiddenLayer();
         e.initialiseInputLayer();
         e.initialiseOutputLayer();
@@ -696,25 +719,13 @@ public class KeystrokeMainActivity extends AppCompatActivity {
         e.setLegitimatetargetOutput();
         e.initialiseInputForHiddenLayer();
         e.initialiseInputForOutputLayer();
-
         e.getFinalWeightsFromInputToHidden(KeystrokeMainActivity.this);
         e.getFinalWeightsFromHiddenToOutput();
-        //e.getFinalBiasHidden();
-        //e.getFinalBiasOutput();
-
         input_layer = new double[45];
         setInputLayer();
         e.getInputLayer(input_layer);
         e.functionHiddenLayer();
-        boolean isLegitimate = e.functionOutputLayerTesting();
-
-        if (isLegitimate) {
-            right_wrong.setTextColor(Color.parseColor("#4CAF50"));
-            right_wrong.setText("ACCESS GRANTED");
-        } else {
-            right_wrong.setTextColor(Color.RED);
-            right_wrong.setText("ACCESS DENIED");
-        }
+        return e.functionOutputLayerTesting();
     }
 
     private void normalizeData(int i) {
@@ -1003,11 +1014,6 @@ public class KeystrokeMainActivity extends AppCompatActivity {
         input_layer[q++] = digraph[4];
         input_layer[q++] = total_time;
         q = 0;
-        String print = "";
-        for (int i = 0; i < 45; i++)
-            print += input_layer[i] + ",";
-
-        Log.e("login activity", print);
 
     }
 
@@ -1017,6 +1023,7 @@ public class KeystrokeMainActivity extends AppCompatActivity {
         SQLiteDatabase mydatabase = mydbhelper.getWritableDatabase();
         Cursor cur = mydatabase.rawQuery("SELECT * from " + Database.PASSWORD_TABLE_NAME, null);
         int count = cur.getCount();
+        cur.close();
         if (count == 0) {
             //set Password
             setPassword();
@@ -1024,11 +1031,14 @@ public class KeystrokeMainActivity extends AppCompatActivity {
             //retrieve password
             String col[] = new String[]{Database.password};
             Cursor c = mydatabase.query(Database.PASSWORD_TABLE_NAME, col, null, null, null, null, null);
-            c.moveToLast();
-            app_password = c.getString(0);
+            if (c.moveToLast()) {
+                app_password = c.getString(0);
+            }
+            c.close();
         }
-        cur = mydatabase.rawQuery("SELECT * from " + Database.TABLE_NAME, null);
-        count = cur.getCount();
+        Cursor cur2 = mydatabase.rawQuery("SELECT * from " + Database.TABLE_NAME, null);
+        count = cur2.getCount();
+        cur2.close();
         attempt.setText("#Attempt No. " + (count + 1));
 
 
@@ -1092,6 +1102,7 @@ public class KeystrokeMainActivity extends AppCompatActivity {
     }
 
     private void checkPassword(String s) {
+        if (app_password == null) return;
         char[] pass = new char[app_password.length()];
         pass = app_password.toCharArray();
         if (current_pointer <= 6) {
