@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Monarch Software</string>
+    <string name="brand_name">Monarch</string>
+    <string name="dashboard_title">Choose a study</string>
+    <string name="dashboard_section">Study modules</string>
+    <string name="theme_switch_dark">Switch to dark mode</string>
+    <string name="theme_switch_light">Switch to light mode</string>
 
     <!-- Monarch Home -->
     <string name="module_keystroke_title">Keystroke Dynamics</string>

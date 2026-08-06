@@ -164,8 +164,9 @@ public class SwipeStudyActivity extends AppCompatActivity implements SensorEvent
 
     @Override
     protected void onPause() {
+        mSensorMgr.unregisterListener(this);
+        stopService(new Intent(this, KeystrokeSensorService.class));
         super.onPause();
-        // sensors stay registered so background collection continues
     }
 
     @Override
@@ -290,6 +291,7 @@ public class SwipeStudyActivity extends AppCompatActivity implements SensorEvent
     }
 
     private void updateStrokeCount() {
-        tvStrokeCount.setText("Strokes recorded: " + strokeIndex);
+        tvStrokeCount.setText(strokeIndex + (strokeIndex == 1
+                ? " stroke recorded" : " strokes recorded"));
     }
 }

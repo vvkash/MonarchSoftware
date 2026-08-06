@@ -1,244 +1,292 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/off_white">
+    android:background="@color/background"
+    android:orientation="vertical">
 
-    <!-- Green header -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="184dp"
+        android:background="@drawable/bg_monarch_hero"
         android:orientation="vertical"
-        android:background="@color/monarch_green"
-        android:paddingStart="24dp"
-        android:paddingEnd="24dp"
-        android:paddingTop="40dp"
+        android:paddingStart="22dp"
+        android:paddingTop="18dp"
+        android:paddingEnd="22dp"
         android:paddingBottom="24dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Keystroke Dynamics"
-            android:textColor="@color/white"
-            android:textSize="24sp"
-            android:textStyle="bold"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:contentDescription="@string/brand_name"
+                android:src="@drawable/ic_monarch_splash" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_weight="1"
+                android:letterSpacing="0.1"
+                android:text="INPUT &amp; IDENTITY"
+                android:textColor="#BFE6DD"
+                android:textSize="10sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3 studies"
+                android:textColor="#D8EFEA"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+        <Space
+            android:layout_width="1dp"
+            android:layout_height="13dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="Select a study component"
-            android:textColor="#CCFFFFFF"
-            android:textSize="13sp"/>
+            android:text="Keystroke dynamics"
+            android:textColor="@color/header_on_surface"
+            android:textSize="27sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Choose a guided protocol. Your timing and touch data stay on this device."
+            android:textColor="#C9E9E2"
+            android:textSize="13sp" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:orientation="vertical"
-        android:padding="20dp">
+        android:paddingStart="18dp"
+        android:paddingTop="14dp"
+        android:paddingEnd="18dp"
+        android:paddingBottom="12dp">
 
-        <!-- PIN Authentication card -->
-        <androidx.cardview.widget.CardView
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="34dp"
+            android:gravity="center_vertical"
+            android:letterSpacing="0.1"
+            android:text="SELECT A PROTOCOL"
+            android:textColor="@color/text_secondary"
+            android:textSize="11sp"
+            android:textStyle="bold" />
+
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/card_pin_auth"
+            style="@style/Widget.Monarch.Card"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:foreground="?attr/selectableItemBackground"
+            android:layout_height="0dp"
+            android:layout_marginBottom="12dp"
+            android:layout_weight="1"
             android:clickable="true"
             android:focusable="true"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="2dp"
-            app:cardBackgroundColor="@color/white"
-            xmlns:app="http://schemas.android.com/apk/res-auto">
+            app:rippleColor="@color/pressed_overlay">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:padding="20dp"
-                android:gravity="center_vertical">
+                android:padding="17dp">
 
-                <LinearLayout
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:background="#E8F5E9"
-                    android:layout_marginEnd="16dp">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="🔐"
-                        android:textSize="22sp"/>
-                </LinearLayout>
+                <FrameLayout
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:background="@drawable/bg_icon_tile_keystroke">
+
+                    <ImageView
+                        android:layout_width="29dp"
+                        android:layout_height="29dp"
+                        android:layout_gravity="center"
+                        android:contentDescription="@null"
+                        android:src="@drawable/ic_study_lock" />
+                </FrameLayout>
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="PIN Authentication"
+                        android:text="PIN authentication"
                         android:textColor="@color/text_primary"
-                        android:textSize="16sp"
-                        android:textStyle="bold"/>
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="3dp"
-                        android:text="6-digit PIN with neural network authentication"
+                        android:layout_marginTop="4dp"
+                        android:maxLines="2"
+                        android:text="Enroll and verify a 6-digit PIN using touch and timing patterns."
                         android:textColor="@color/text_secondary"
-                        android:textSize="13sp"/>
+                        android:textSize="12sp" />
                 </LinearLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="›"
-                    android:textColor="@color/monarch_green"
-                    android:textSize="24sp"/>
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_arrow_forward" />
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
-        <!-- Typing Study card -->
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/card_typing_study"
+            style="@style/Widget.Monarch.Card"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:foreground="?attr/selectableItemBackground"
+            android:layout_height="0dp"
+            android:layout_marginBottom="12dp"
+            android:layout_weight="1"
             android:clickable="true"
             android:focusable="true"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="2dp"
-            app:cardBackgroundColor="@color/white"
-            xmlns:app="http://schemas.android.com/apk/res-auto">
+            app:rippleColor="@color/pressed_overlay">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:padding="20dp"
-                android:gravity="center_vertical">
+                android:padding="17dp">
 
-                <LinearLayout
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:background="#E8F5E9"
-                    android:layout_marginEnd="16dp">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="✍"
-                        android:textSize="22sp"/>
-                </LinearLayout>
+                <FrameLayout
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:background="@drawable/bg_icon_tile_keystroke">
+
+                    <ImageView
+                        android:layout_width="29dp"
+                        android:layout_height="29dp"
+                        android:layout_gravity="center"
+                        android:contentDescription="@null"
+                        android:src="@drawable/ic_study_typing" />
+                </FrameLayout>
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Typing Study"
+                        android:text="Typing study"
                         android:textColor="@color/text_primary"
-                        android:textSize="16sp"
-                        android:textStyle="bold"/>
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="3dp"
-                        android:text="Transcribe sentences with keystroke timing &amp; IMU"
+                        android:layout_marginTop="4dp"
+                        android:maxLines="2"
+                        android:text="Transcribe short prompts while keystroke timing and IMU are recorded."
                         android:textColor="@color/text_secondary"
-                        android:textSize="13sp"/>
+                        android:textSize="12sp" />
                 </LinearLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="›"
-                    android:textColor="@color/monarch_green"
-                    android:textSize="24sp"/>
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_arrow_forward" />
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
-        <!-- Swipe Study card -->
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/card_swipe_study"
+            style="@style/Widget.Monarch.Card"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:foreground="?attr/selectableItemBackground"
+            android:layout_height="0dp"
+            android:layout_marginBottom="8dp"
+            android:layout_weight="1"
             android:clickable="true"
             android:focusable="true"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="2dp"
-            app:cardBackgroundColor="@color/white"
-            xmlns:app="http://schemas.android.com/apk/res-auto">
+            app:rippleColor="@color/pressed_overlay">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:padding="20dp"
-                android:gravity="center_vertical">
+                android:padding="17dp">
 
-                <LinearLayout
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:background="#E8F5E9"
-                    android:layout_marginEnd="16dp">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="👆"
-                        android:textSize="22sp"/>
-                </LinearLayout>
+                <FrameLayout
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:background="@drawable/bg_icon_tile_keystroke">
+
+                    <ImageView
+                        android:layout_width="29dp"
+                        android:layout_height="29dp"
+                        android:layout_gravity="center"
+                        android:contentDescription="@null"
+                        android:src="@drawable/ic_study_swipe" />
+                </FrameLayout>
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Swipe Study"
+                        android:text="Swipe study"
                         android:textColor="@color/text_primary"
-                        android:textSize="16sp"
-                        android:textStyle="bold"/>
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="3dp"
-                        android:text="Scroll through articles with swipe gesture capture"
+                        android:layout_marginTop="4dp"
+                        android:maxLines="2"
+                        android:text="Read a natural article feed while swipe gestures are captured."
                         android:textColor="@color/text_secondary"
-                        android:textSize="13sp"/>
+                        android:textSize="12sp" />
                 </LinearLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="›"
-                    android:textColor="@color/monarch_green"
-                    android:textSize="24sp"/>
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_arrow_forward" />
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="24dp"
+            android:gravity="center"
+            android:text="You can leave any protocol and resume with a fresh session."
+            android:textColor="@color/text_hint"
+            android:textSize="10sp" />
     </LinearLayout>
+
 </LinearLayout>

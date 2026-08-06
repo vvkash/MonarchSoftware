@@ -1,70 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F6F4F0">
+    android:background="@color/background"
+    android:orientation="vertical">
 
-    <!-- Header bar -->
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#12111A"
-        android:padding="12dp"
-        android:gravity="center_vertical">
+        android:layout_height="110dp"
+        android:background="@drawable/bg_monarch_hero"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="20dp"
+        android:paddingEnd="16dp">
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="SWIPE STUDY"
-                android:textSize="13sp"
-                android:textStyle="bold"
-                android:textColor="#FFFFFF"/>
+                android:letterSpacing="0.1"
+                android:text="NATURAL SCROLLING"
+                android:textColor="#BFE6DD"
+                android:textSize="10sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Swipe study"
+                android:textColor="@color/header_on_surface"
+                android:textSize="25sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tv_stroke_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Strokes recorded: 0"
-                android:textSize="11sp"
-                android:textColor="#BDB08A"/>
+                android:layout_marginTop="3dp"
+                android:text="0 strokes recorded"
+                android:textColor="#C9E9E2"
+                android:textSize="11sp" />
         </LinearLayout>
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_swipe_done"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Done"
-            android:backgroundTint="#D4A843"
-            android:textColor="#FFFFFF"/>
-
+            android:layout_height="44dp"
+            android:text="Finish"
+            android:textColor="@color/on_primary"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:backgroundTint="@color/brand_gold"
+            app:cornerRadius="14dp" />
     </LinearLayout>
 
-    <!-- Instruction -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:text="Scroll through the articles naturally. Your swipe gestures are being recorded."
-        android:textSize="12sp"
-        android:textColor="#6B7280"
-        android:background="#EEEBE4"/>
+        android:background="@color/surface_variant"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="18dp"
+        android:paddingTop="11dp"
+        android:paddingEnd="18dp"
+        android:paddingBottom="11dp">
 
-    <!-- Scrollable article feed -->
+        <View
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:background="@drawable/bg_status_dot"
+            android:backgroundTint="@color/success" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"
+            android:text="Scroll through the articles naturally. Each complete gesture is saved automatically."
+            android:textColor="@color/text_secondary"
+            android:textSize="11sp" />
+    </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_feed"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:clipToPadding="false"
-        android:paddingTop="4dp"
-        android:paddingBottom="4dp"/>
-
+        android:overScrollMode="never"
+        android:paddingTop="8dp"
+        android:paddingBottom="14dp" />
 </LinearLayout>

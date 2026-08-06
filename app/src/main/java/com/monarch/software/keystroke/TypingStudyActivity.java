@@ -5,7 +5,6 @@ import com.monarch.software.R;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -24,6 +23,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+
+import com.google.android.material.progressindicator.LinearProgressIndicator;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -69,6 +71,7 @@ public class TypingStudyActivity extends AppCompatActivity implements SensorEven
     // UI
     // -----------------------------------------------------------------------
     private TextView tvProgress, tvReference, tvWpm, tvErrors, tvTime;
+    private LinearProgressIndicator sentenceProgress;
     private EditText etInput;
     private Button btnNext, btnDone;
 
@@ -132,6 +135,7 @@ public class TypingStudyActivity extends AppCompatActivity implements SensorEven
         tvWpm         = findViewById(R.id.tv_wpm);
         tvErrors      = findViewById(R.id.tv_errors);
         tvTime        = findViewById(R.id.tv_time);
+        sentenceProgress = findViewById(R.id.progress_sentences);
         etInput       = findViewById(R.id.et_input);
         btnNext       = findViewById(R.id.btn_next);
         btnDone       = findViewById(R.id.btn_done);
@@ -254,8 +258,9 @@ public class TypingStudyActivity extends AppCompatActivity implements SensorEven
 
     @Override
     protected void onPause() {
+        mSensorMgr.unregisterListener(this);
+        stopService(new Intent(this, KeystrokeSensorService.class));
         super.onPause();
-        // sensors stay registered so background collection continues
     }
 
     @Override
@@ -317,7 +322,8 @@ public class TypingStudyActivity extends AppCompatActivity implements SensorEven
     // -----------------------------------------------------------------------
 
     private void loadSentence(int index) {
-        tvProgress.setText("Sentence " + (index + 1) + " of " + SENTENCES.length);
+        tvProgress.setText((index + 1) + " / " + SENTENCES.length);
+        sentenceProgress.setProgressCompat(index + 1, index > 0);
         tvReference.setText(SENTENCES[index]);
         etInput.setText("");
         etInput.setEnabled(true);
@@ -361,16 +367,20 @@ public class TypingStudyActivity extends AppCompatActivity implements SensorEven
         for (int i = 0; i < refLen; i++) {
             if (i < minLen) {
                 if (typed.charAt(i) == reference.charAt(i)) {
-                    span.setSpan(new ForegroundColorSpan(Color.parseColor("#2E7D32")),
+                    span.setSpan(new ForegroundColorSpan(
+                                    ContextCompat.getColor(this, R.color.success)),
                             i, i + 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                 } else {
-                    span.setSpan(new BackgroundColorSpan(Color.parseColor("#FFCDD2")),
+                    span.setSpan(new BackgroundColorSpan(
+                                    ContextCompat.getColor(this, R.color.error_bg)),
                             i, i + 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                    span.setSpan(new ForegroundColorSpan(Color.parseColor("#B71C1C")),
+                    span.setSpan(new ForegroundColorSpan(
+                                    ContextCompat.getColor(this, R.color.error)),
                             i, i + 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                 }
             } else {
-                span.setSpan(new ForegroundColorSpan(Color.parseColor("#BDBDBD")),
+                span.setSpan(new ForegroundColorSpan(
+                                ContextCompat.getColor(this, R.color.text_hint)),
                         i, i + 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
         }

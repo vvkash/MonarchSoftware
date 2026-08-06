@@ -1,0 +1,28 @@
+{
+  "dataset_name": "monarch_smart_dataset",
+  "version": "0.1.0",
+  "participants": [
+    {
+      "id": "aakash",
+      "display_name": "Aakash"
+    },
+    {
+      "id": "issam",
+      "display_name": "Issam"
+    },
+    {
+      "id": "houston",
+      "display_name": "Houston"
+    }
+  ],
+  "modalities": [
+    "gait",
+    "keystroke",
+    "touchstroke",
+    "ecg"
+  ],
+  "notes": [
+    "Place raw exports in data/participants/<participant>/<modality>/.",
+    "Do not commit participant data unless the study protocol explicitly allows it."
+  ]
+}

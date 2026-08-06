@@ -1,6 +1,5 @@
 package com.monarch.software.phase2;
 
-import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
@@ -16,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.monarch.software.R;
 
 import java.util.ArrayList;
@@ -190,7 +190,7 @@ public class SocialMediaActivity extends AppCompatActivity {
     }
 
     private void showResult(boolean correct) {
-        new AlertDialog.Builder(this)
+        new MaterialAlertDialogBuilder(this)
             .setTitle(correct ? "✅  Correct!" : "❌  Not quite")
             .setMessage(correct
                 ? "You found the right post."
@@ -208,7 +208,7 @@ public class SocialMediaActivity extends AppCompatActivity {
         getSharedPreferences(Phase2HomeActivity.PREFS, MODE_PRIVATE)
             .edit().putBoolean(Phase2HomeActivity.KEY_SOCIAL, true).apply();
 
-        new AlertDialog.Builder(this)
+        new MaterialAlertDialogBuilder(this)
             .setTitle("🎉  Task Complete!")
             .setMessage("All 5 social media trials finished. Touch data saved.")
             .setCancelable(false)

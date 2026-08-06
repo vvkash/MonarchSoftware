@@ -22,7 +22,7 @@ public class KeystrokeSensorService extends Service {
         createNotificationChannel();
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setContentTitle("Study in Progress")
-                .setContentText("IMU sensor recording active — do not close the app")
+                .setContentText("IMU recording is active on the current study screen")
                 .setSmallIcon(android.R.drawable.ic_menu_compass)
                 .setOngoing(true)
                 .build();
@@ -33,7 +33,7 @@ public class KeystrokeSensorService extends Service {
             startForeground(NOTIF_ID, notification);
         }
 
-        return START_STICKY;
+        return START_NOT_STICKY;
     }
 
     @Override
@@ -47,7 +47,7 @@ public class KeystrokeSensorService extends Service {
                     CHANNEL_ID,
                     "Sensor Study",
                     NotificationManager.IMPORTANCE_LOW);
-            channel.setDescription("Keeps IMU sensor recording active during typing and swipe studies");
+            channel.setDescription("Shows while typing and swipe studies record IMU data");
             getSystemService(NotificationManager.class).createNotificationChannel(channel);
         }
     }

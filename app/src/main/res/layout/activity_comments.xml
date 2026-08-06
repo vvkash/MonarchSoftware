@@ -1,173 +1,152 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#12111A">
+    android:background="@color/social_surface"
+    android:orientation="vertical">
 
-    <!-- ── Header ── -->
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="52dp"
+        android:layout_height="56dp"
         android:gravity="center_vertical"
-        android:paddingStart="4dp"
-        android:paddingEnd="16dp">
+        android:orientation="horizontal"
+        android:paddingEnd="8dp">
 
-        <TextView
-            android:id="@+id/tv_back"
+        <ImageButton
+            android:id="@+id/btn_back"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:text="←"
-            android:textSize="24sp"
-            android:textColor="#FFFFFF"
-            android:gravity="center"
-            android:padding="8dp"/>
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Back"
+            android:padding="12dp"
+            android:src="@drawable/ic_social_back" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:gravity="center"
             android:text="Comments"
+            android:textColor="@color/social_text"
             android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="#FFFFFF"
-            android:gravity="center"/>
+            android:textStyle="bold" />
 
-        <!-- spacer to balance back button -->
         <View
             android:layout_width="48dp"
-            android:layout_height="1dp"/>
-
+            android:layout_height="1dp" />
     </LinearLayout>
 
-    <!-- ── Divider ── -->
     <View
         android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="#252535"/>
+        android:layout_height="1dp"
+        android:background="@color/social_border" />
 
-    <!-- ── Post preview strip ── -->
     <LinearLayout
-        android:orientation="horizontal"
+        android:id="@+id/post_preview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="12dp"
-        android:gravity="center_vertical">
+        android:layout_height="72dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp">
 
-        <!-- Thumbnail -->
-        <FrameLayout
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginEnd="12dp">
+        <ImageView
+            android:id="@+id/iv_post_preview"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:layout_marginEnd="12dp"
+            android:contentDescription="Post preview"
+            android:scaleType="centerCrop" />
 
-            <View
-                android:id="@+id/view_post_color_preview"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-
-            <TextView
-                android:id="@+id/tv_post_emoji_preview"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="24sp"
-                android:gravity="center"/>
-
-        </FrameLayout>
-
-        <!-- Caption + handle -->
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/tv_post_handle_preview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/social_text"
                 android:textSize="13sp"
-                android:textStyle="bold"
-                android:textColor="#FFFFFF"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tv_post_caption_preview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:textColor="#8A8A9A"
+                android:ellipsize="end"
                 android:maxLines="2"
-                android:ellipsize="end"/>
-
+                android:textColor="@color/social_text_secondary"
+                android:textSize="12sp" />
         </LinearLayout>
-
     </LinearLayout>
 
-    <!-- ── Divider ── -->
     <View
         android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="#252535"/>
+        android:layout_height="1dp"
+        android:background="@color/social_border" />
 
-    <!-- ── Comments list ── -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_comments"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:clipToPadding="false"
-        android:paddingBottom="8dp"/>
+        android:paddingBottom="8dp" />
 
-    <!-- ── Divider ── -->
     <View
         android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="#252535"/>
+        android:layout_height="1dp"
+        android:background="@color/social_border" />
 
-    <!-- ── Input bar ── -->
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
+        android:background="@color/social_surface"
         android:gravity="center_vertical"
-        android:background="#1A1929">
+        android:orientation="horizontal"
+        android:padding="10dp">
 
-        <!-- "You" avatar -->
-        <TextView
+        <ImageView
+            android:id="@+id/iv_current_user"
             android:layout_width="36dp"
             android:layout_height="36dp"
-            android:text="😊"
-            android:textSize="18sp"
-            android:gravity="center"
-            android:background="@drawable/circle_bg_purple"
-            android:layout_marginEnd="10dp"/>
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/social_avatar_mask"
+            android:clipToOutline="true"
+            android:contentDescription="Your profile image"
+            android:scaleType="centerCrop"
+            android:src="@drawable/social_workspace_thumb" />
 
         <EditText
             android:id="@+id/et_comment_input"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="42dp"
             android:layout_weight="1"
+            android:background="@drawable/social_input_background"
             android:hint="Add a comment…"
-            android:textColorHint="#6B6B7A"
-            android:textColor="#EEEEEE"
-            android:textSize="14sp"
-            android:background="@null"
             android:imeOptions="actionSend"
-            android:inputType="textMultiLine|textCapSentences"
-            android:maxLines="4"/>
+            android:inputType="textCapSentences"
+            android:maxLines="1"
+            android:paddingStart="14dp"
+            android:paddingEnd="14dp"
+            android:textColor="@color/social_text"
+            android:textColorHint="@color/social_text_secondary"
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/tv_post_btn"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="42dp"
+            android:gravity="center"
+            android:paddingStart="12dp"
+            android:paddingEnd="6dp"
             android:text="Post"
+            android:textColor="@color/social_accent"
             android:textSize="14sp"
-            android:textStyle="bold"
-            android:textColor="#D4A843"
-            android:padding="8dp"/>
-
+            android:textStyle="bold" />
     </LinearLayout>
 
 </LinearLayout>

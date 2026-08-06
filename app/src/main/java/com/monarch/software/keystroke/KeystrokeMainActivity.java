@@ -2,7 +2,6 @@ package com.monarch.software.keystroke;
 
 import com.monarch.software.R;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
@@ -19,6 +18,9 @@ import android.os.Looper;
 import android.os.Message;
 import android.os.SystemClock;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AlertDialog;
+
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -128,8 +130,8 @@ public class KeystrokeMainActivity extends AppCompatActivity {
                             dbs.delete(Database.ILLEGITIMATE_TABLE_NAME, null, null);
                             trainingData training = new trainingData(KeystrokeMainActivity.this);
                             training.generateIllegitimateDataset();
-                            trainingActivity ta = new trainingActivity(KeystrokeMainActivity.this);
-                            ta.performTraining();
+                            OnDeviceTrainer trainer = new KeystrokeBackpropTrainer(KeystrokeMainActivity.this);
+                            trainer.train();
                             runOnUiThread(() -> {
                                 mProgressDialog.dismiss();
                                 right_wrong.setTextColor(Color.parseColor("#4CAF50"));
@@ -637,8 +639,8 @@ public class KeystrokeMainActivity extends AppCompatActivity {
                                     trainingData training = new trainingData(KeystrokeMainActivity.this);
                                     training.generateLegitimateDataset();
                                     training.generateIllegitimateDataset();
-                                    trainingActivity ta = new trainingActivity(KeystrokeMainActivity.this);
-                                    ta.performTraining();
+                                    OnDeviceTrainer trainer = new KeystrokeBackpropTrainer(KeystrokeMainActivity.this);
+                                    trainer.train();
                                     runOnUiThread(() -> {
                                         mProgressDialog.dismiss();
                                         right_wrong.setTextColor(Color.parseColor("#4CAF50"));
@@ -942,7 +944,7 @@ public class KeystrokeMainActivity extends AppCompatActivity {
             startActivity(ex);
             return true;
         } else if (id == R.id.reset_auth) {
-            new android.app.AlertDialog.Builder(this)
+            new MaterialAlertDialogBuilder(this)
                 .setTitle("Restart Auth")
                 .setMessage("This will delete all training data and weights. Are you sure?")
                 .setPositiveButton("Restart", (dialog, which) -> {
@@ -1188,16 +1190,18 @@ public class KeystrokeMainActivity extends AppCompatActivity {
     }
 
     private void setPassword() {
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(KeystrokeMainActivity.this);
+        MaterialAlertDialogBuilder alertDialogBuilder =
+                new MaterialAlertDialogBuilder(KeystrokeMainActivity.this);
         alertDialogBuilder.setTitle("AuthDNA");
-        LayoutInflater layoutInflater = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater layoutInflater = LayoutInflater.from(KeystrokeMainActivity.this);
         View view = layoutInflater.inflate(R.layout.ks_instructions, null);
         alertDialogBuilder.setPositiveButton("START TYPING", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface arg0, int arg1) {
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(KeystrokeMainActivity.this);
+                MaterialAlertDialogBuilder alertDialogBuilder =
+                        new MaterialAlertDialogBuilder(KeystrokeMainActivity.this);
                 alertDialogBuilder.setTitle("Set Training Code");
-                LayoutInflater layoutInflater = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                LayoutInflater layoutInflater = LayoutInflater.from(KeystrokeMainActivity.this);
                 View view = layoutInflater.inflate(R.layout.ks_set_password, null);
                 alertDialogBuilder.setPositiveButton("Set", new DialogInterface.OnClickListener() {
                     @Override

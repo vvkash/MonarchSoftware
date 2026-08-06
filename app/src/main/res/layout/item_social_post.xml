@@ -1,33 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
+<com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/Widget.Monarch.Card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="8dp"
-    android:layout_marginEnd="8dp"
-    android:layout_marginBottom="10dp"
-    app:cardCornerRadius="14dp"
-    app:cardElevation="1dp"
-    app:cardBackgroundColor="@color/surface">
+    android:layout_marginStart="14dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginEnd="14dp"
+    android:layout_marginBottom="5dp"
+    android:clickable="true"
+    android:focusable="true"
+    app:rippleColor="@color/pressed_overlay">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="12dp"
-        android:gravity="center_vertical">
+        android:padding="13dp">
 
-        <!-- Thumbnail -->
-        <TextView
-            android:id="@+id/tv_thumbnail"
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="72dp"
             android:layout_height="72dp"
-            android:textSize="30sp"
-            android:gravity="center"
-            android:layout_marginEnd="14dp"/>
+            android:layout_marginEnd="14dp"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="0dp">
 
-        <!-- Text content -->
+            <TextView
+                android:id="@+id/tv_thumbnail"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textSize="30sp" />
+        </com.google.android.material.card.MaterialCardView>
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -38,35 +45,41 @@
                 android:id="@+id/tv_category"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="NATURE"
-                android:textSize="10sp"
-                android:textColor="@color/accent"
-                android:textStyle="bold"
                 android:letterSpacing="0.08"
-                android:paddingBottom="3dp"/>
+                android:text="NATURE"
+                android:textColor="@color/brand_violet"
+                android:textSize="9sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tv_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Winding road in a forest"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                android:textColor="@color/text_primary"
-                android:maxLines="2"
+                android:layout_marginTop="3dp"
                 android:ellipsize="end"
-                android:paddingBottom="4dp"/>
+                android:maxLines="2"
+                android:text="Winding road in a forest"
+                android:textColor="@color/text_primary"
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tv_snippet"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="A scenic road winds through a dense forest..."
-                android:textSize="12sp"
-                android:textColor="@color/text_secondary"
+                android:layout_marginTop="4dp"
+                android:ellipsize="end"
                 android:maxLines="2"
-                android:ellipsize="end"/>
+                android:text="A scenic road winds through a dense forest..."
+                android:textColor="@color/text_secondary"
+                android:textSize="11sp" />
         </LinearLayout>
 
+        <ImageView
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_marginStart="8dp"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_arrow_forward" />
     </LinearLayout>
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>

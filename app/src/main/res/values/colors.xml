@@ -1,43 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Monarch primary palette: green + white -->
-    <color name="monarch_green">#1B5E20</color>
-    <color name="monarch_green_dark">#145A32</color>
-    <color name="monarch_green_medium">#2E7D32</color>
-    <color name="monarch_green_light">#4CAF50</color>
-    <color name="monarch_green_pale">#E8F5E9</color>
-    <color name="monarch_green_card">#F1F8E9</color>
+    <!-- Monarch brand system -->
+    <color name="monarch_green">#176B5B</color>
+    <color name="monarch_green_dark">#0D443A</color>
+    <color name="monarch_green_medium">#268576</color>
+    <color name="monarch_green_light">#55B8A5</color>
+    <color name="monarch_green_pale">#E0F2ED</color>
+    <color name="monarch_green_card">#ECF7F4</color>
+    <color name="brand_gold">#E6AA3D</color>
+    <color name="brand_gold_soft">#FFF2D3</color>
+    <color name="brand_violet">#7459A8</color>
+    <color name="header_surface">#103F37</color>
+    <color name="header_on_surface">#F6FFFC</color>
+    <color name="splash_background">#0D443A</color>
 
     <color name="white">#FFFFFF</color>
-    <color name="off_white">#FAFAFA</color>
+    <color name="off_white">#F5F8F7</color>
+    <color name="background">#F5F8F7</color>
     <color name="surface">#FFFFFF</color>
-    <color name="surface_variant">#F5F5F5</color>
+    <color name="surface_variant">#EAF1EF</color>
+    <color name="surface_elevated">#FFFFFF</color>
 
-    <color name="text_primary">#212121</color>
-    <color name="text_secondary">#757575</color>
-    <color name="text_hint">#9E9E9E</color>
+    <color name="text_primary">#16221F</color>
+    <color name="text_secondary">#63716D</color>
+    <color name="text_hint">#89948F</color>
     <color name="text_on_green">#FFFFFF</color>
 
-    <color name="divider">#E0E0E0</color>
-    <color name="border">#C8E6C9</color>
+    <color name="divider">#DCE5E2</color>
+    <color name="border">#D3DFDB</color>
+    <color name="card_stroke">#DDE7E4</color>
+    <color name="pressed_overlay">#14268776</color>
+    <color name="icon_tile_keystroke">#E4F3EF</color>
+    <color name="icon_tile_biometrics">#E7ECF8</color>
+    <color name="icon_tile_social">#F3EAF7</color>
 
-    <color name="error">#B71C1C</color>
-    <color name="error_bg">#FFCDD2</color>
-    <color name="success">#2E7D32</color>
-    <color name="warning">#F57F17</color>
+    <color name="error">#B3261E</color>
+    <color name="error_bg">#F9DEDC</color>
+    <color name="success">#167A55</color>
+    <color name="warning">#B56A00</color>
 
     <!-- Legacy references (Phase2Study layouts) -->
-    <color name="primary">#1B5E20</color>
-    <color name="primary_variant">#145A32</color>
-    <color name="accent">#4CAF50</color>
-    <color name="accent_light">#81C784</color>
+    <color name="primary">#176B5B</color>
+    <color name="primary_variant">#0D443A</color>
+    <color name="accent">#E6AA3D</color>
+    <color name="accent_light">#F2C66F</color>
     <color name="on_primary">#FFFFFF</color>
-    <color name="tag_bg">#E8F5E9</color>
-    <color name="tag_text">#2E7D32</color>
+    <color name="tag_bg">#E0F2ED</color>
+    <color name="tag_text">#176B5B</color>
     <color name="text_light">#FFFFFF</color>
 
     <!-- Biometrics layout legacy colors -->
-    <color name="register_bk_color">#1B5E20</color>
+    <color name="register_bk_color">#F5F8F7</color>
     <color name="whiteTextColor">#FFFFFF</color>
 
     <!-- Gallery object colors (Phase2 image gallery) -->
@@ -51,4 +64,15 @@
     <color name="obj_book">#6D4C41</color>
     <color name="obj_flower">#D81B60</color>
     <color name="obj_house">#43A047</color>
+
+    <!-- Original Monarch Social palette -->
+    <color name="social_background">#F7F9F8</color>
+    <color name="social_surface">#FFFFFF</color>
+    <color name="social_text">#16221F</color>
+    <color name="social_text_secondary">#68746F</color>
+    <color name="social_border">#DDE5E2</color>
+    <color name="social_pressed">#EDF2F0</color>
+    <color name="social_accent">#7459A8</color>
+    <color name="social_verified">#2684FC</color>
+    <color name="social_like">#E94057</color>
 </resources>

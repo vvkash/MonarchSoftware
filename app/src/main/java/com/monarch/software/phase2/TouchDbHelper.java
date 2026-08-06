@@ -5,8 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 /**
- * SQLite helper for recording raw touchstroke events captured during
- * the Social Media and Image Gallery tasks.
+ * SQLite helper for recording raw touchstroke and semantic engagement events.
  *
  * Each row represents one MotionEvent (DOWN / MOVE / UP) with:
  *  - screen coordinates (x, y and raw x, y)
@@ -17,7 +16,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class TouchDbHelper extends SQLiteOpenHelper {
 
     public static final String DB_NAME   = "phase2_touch.db";
-    public static final int    DB_VERSION = 2;
+    public static final int    DB_VERSION = 3;
     public static final String TABLE      = "touch_events";
 
     // Feed engagement events table
@@ -27,6 +26,10 @@ public class TouchDbHelper extends SQLiteOpenHelper {
     public static final String COL_FEED_USERNAME       = "username";
     public static final String COL_FEED_SCROLL_POS     = "scroll_pos";
     public static final String COL_FEED_VIEW_DURATION  = "view_duration_ms";
+    public static final String COL_FEED_SCREEN         = "screen_name";
+    public static final String COL_FEED_TARGET         = "target";
+    public static final String COL_FEED_DETAILS        = "details";
+    public static final String COL_FEED_VISIBLE_PERCENT = "visible_percent";
 
     // Column names
     public static final String COL_ID                = "_id";
@@ -53,6 +56,10 @@ public class TouchDbHelper extends SQLiteOpenHelper {
         COL_FEED_USERNAME           + " TEXT,"    +
         COL_FEED_SCROLL_POS         + " INTEGER," +
         COL_FEED_VIEW_DURATION      + " INTEGER," +
+        COL_FEED_SCREEN             + " TEXT,"    +
+        COL_FEED_TARGET             + " TEXT,"    +
+        COL_FEED_DETAILS            + " TEXT,"    +
+        COL_FEED_VISIBLE_PERCENT    + " REAL,"    +
         COL_TIMESTAMP_MS            + " INTEGER," +
         COL_SESSION_TIMESTAMP       + " INTEGER"  +
         ");";
@@ -89,8 +96,12 @@ public class TouchDbHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         if (oldVersion < 2) {
-            // Add feed_events table; preserve existing touch_events data
             db.execSQL(CREATE_FEED_SQL);
+        } else if (oldVersion < 3) {
+            db.execSQL("ALTER TABLE " + FEED_TABLE + " ADD COLUMN " + COL_FEED_SCREEN + " TEXT");
+            db.execSQL("ALTER TABLE " + FEED_TABLE + " ADD COLUMN " + COL_FEED_TARGET + " TEXT");
+            db.execSQL("ALTER TABLE " + FEED_TABLE + " ADD COLUMN " + COL_FEED_DETAILS + " TEXT");
+            db.execSQL("ALTER TABLE " + FEED_TABLE + " ADD COLUMN " + COL_FEED_VISIBLE_PERCENT + " REAL");
         }
     }
 }

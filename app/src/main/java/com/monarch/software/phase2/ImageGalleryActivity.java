@@ -1,6 +1,5 @@
 package com.monarch.software.phase2;
 
-import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -20,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputEditText;
 import com.monarch.software.R;
 
@@ -71,6 +71,15 @@ public class ImageGalleryActivity extends AppCompatActivity {
     private ViewPager2 viewPager;
     private TextInputEditText etCount;
     private MaterialButton btnSubmit;
+    private final ViewPager2.OnPageChangeCallback pageChangeCallback =
+            new ViewPager2.OnPageChangeCallback() {
+                @Override
+                public void onPageSelected(int position) {
+                    currentPage = position;
+                    tvPosition.setText((position + 1) + " / 20");
+                    updateDots(position);
+                }
+            };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +100,7 @@ public class ImageGalleryActivity extends AppCompatActivity {
         btnSubmit      = findViewById(R.id.btn_submit_count);
 
         btnSubmit.setOnClickListener(v -> onSubmitCount());
+        viewPager.registerOnPageChangeCallback(pageChangeCallback);
 
         loadTrial(0);
     }
@@ -195,15 +205,6 @@ public class ImageGalleryActivity extends AppCompatActivity {
         viewPager.setAdapter(adapter);
         viewPager.setCurrentItem(0, false);
 
-        viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
-            @Override
-            public void onPageSelected(int position) {
-                currentPage = position;
-                tvPosition.setText((position + 1) + " / 20");
-                updateDots(position);
-            }
-        });
-
         buildDots();
         tvPosition.setText("1 / 20");
     }
@@ -236,12 +237,18 @@ public class ImageGalleryActivity extends AppCompatActivity {
             Toast.makeText(this, "Please enter your count", Toast.LENGTH_SHORT).show();
             return;
         }
-        int userCount = Integer.parseInt(input);
+        int userCount;
+        try {
+            userCount = Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            Toast.makeText(this, "Enter a valid count.", Toast.LENGTH_SHORT).show();
+            return;
+        }
         int correct   = TRIALS[currentTrial][1];
         String objName= OBJECTS[TRIALS[currentTrial][0]][0];
         boolean right = (userCount == correct);
 
-        new AlertDialog.Builder(this)
+        new MaterialAlertDialogBuilder(this)
             .setTitle(right ? "✅  Correct!" : "❌  Not quite")
             .setMessage(right
                 ? "There were " + correct + " " + objName + "S. Well done!"
@@ -259,7 +266,7 @@ public class ImageGalleryActivity extends AppCompatActivity {
         getSharedPreferences(Phase2HomeActivity.PREFS, MODE_PRIVATE)
             .edit().putBoolean(Phase2HomeActivity.KEY_GALLERY, true).apply();
 
-        new AlertDialog.Builder(this)
+        new MaterialAlertDialogBuilder(this)
             .setTitle("🎉  Task Complete!")
             .setMessage("All 5 image gallery trials finished. Touch data saved.")
             .setCancelable(false)
@@ -269,6 +276,7 @@ public class ImageGalleryActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
+        viewPager.unregisterOnPageChangeCallback(pageChangeCallback);
         super.onDestroy();
         if (touchDb != null) touchDb.close();
     }

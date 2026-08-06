@@ -1,0 +1,35 @@
+{
+  "license": "Unsplash License",
+  "license_url": "https://unsplash.com/license",
+  "iconography": {
+    "source": "Google Material Icons",
+    "license": "Apache License 2.0",
+    "license_url": "https://www.apache.org/licenses/LICENSE-2.0"
+  },
+  "usage_note": "Bundled, cropped feed media. No image is sold or redistributed as a standalone product. The feed uses fictional accounts and does not imply creator endorsement.",
+  "sources": [
+    {"resource":"social_sunrise","url":"https://images.unsplash.com/photo-1470252649378-9c29740c9fa8"},
+    {"resource":"social_mountain","url":"https://images.unsplash.com/photo-1500534623283-312aade485b7"},
+    {"resource":"social_coffee","url":"https://images.unsplash.com/photo-1495474472287-4d71bcdd2085"},
+    {"resource":"social_beach","url":"https://images.unsplash.com/photo-1507525428034-b723cf961d3e"},
+    {"resource":"social_street","url":"https://images.unsplash.com/photo-1449824913935-59a10b8d2000"},
+    {"resource":"social_forest","url":"https://images.unsplash.com/photo-1441974231531-c6227db76b6e"},
+    {"resource":"social_home","url":"https://images.unsplash.com/photo-1487958449943-2429e8be8625"},
+    {"resource":"social_flowers","url":"https://images.unsplash.com/photo-1490750967868-88aa4486c946"},
+    {"resource":"social_salad","url":"https://images.unsplash.com/photo-1540189549336-e6e99c3679fe"},
+    {"resource":"social_restaurant","url":"https://images.unsplash.com/photo-1517248135467-4c7edcad34c4"},
+    {"resource":"social_ocean","url":"https://images.unsplash.com/photo-1518837695005-2083093ee35b"},
+    {"resource":"social_architecture","url":"https://images.unsplash.com/photo-1518005020951-eccb494ad742"},
+    {"resource":"social_lake","url":"https://images.unsplash.com/photo-1470770841072-f978cf4d019e"},
+    {"resource":"social_meadow","url":"https://images.unsplash.com/photo-1472214103451-9374bd1c798e"},
+    {"resource":"social_redwoods","url":"https://images.unsplash.com/photo-1523712999610-f77fbcfc3843"},
+    {"resource":"social_interior","url":"https://images.unsplash.com/photo-1484101403633-562f891dc89a"},
+    {"resource":"social_workspace","url":"https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85"},
+    {"resource":"social_city","url":"https://images.unsplash.com/photo-1477959858617-67f85cf4f1df"},
+    {"resource":"social_night_sky","url":"https://images.unsplash.com/photo-1419242902214-272b3f66ee7a"},
+    {"resource":"social_dog","url":"https://images.unsplash.com/photo-1552053831-71594a27632d"},
+    {"resource":"social_bread","url":"https://images.unsplash.com/photo-1509440159596-0249088772ff"},
+    {"resource":"social_books","url":"https://images.unsplash.com/photo-1495446815901-a7297e633e8d"},
+    {"resource":"social_bicycle","url":"https://images.unsplash.com/photo-1485965120184-e220f721d03e"}
+  ]
+}

@@ -4,14 +4,15 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#12111A">
+    android:background="@color/social_surface">
 
     <HorizontalScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scrollbars="none"
         android:paddingStart="4dp"
-        android:paddingEnd="4dp">
+        android:paddingEnd="4dp"
+        android:fillViewport="false">
 
         <LinearLayout
             android:id="@+id/stories_container"
@@ -23,8 +24,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="#252535"
-        android:layout_marginTop="4dp"/>
+        android:layout_height="1dp"
+        android:background="@color/social_border" />
 
 </LinearLayout>

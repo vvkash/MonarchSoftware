@@ -1,56 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#12111A">
+    android:background="@color/social_background"
+    android:orientation="vertical">
 
-    <!-- Top bar -->
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#12111A"
-        android:elevation="4dp"
-        android:padding="14dp"
-        android:paddingTop="36dp"
-        android:gravity="center_vertical">
+        android:layout_height="56dp"
+        android:background="@color/social_surface"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="16dp"
+        android:paddingEnd="8dp">
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:fontFamily="sans-serif"
+            android:letterSpacing="-0.03"
             android:text="Monarch"
-            android:textSize="26sp"
-            android:textStyle="bold|italic"
-            android:textColor="#FFFFFF"
-            android:fontFamily="serif"/>
+            android:textColor="@color/social_text"
+            android:textSize="25sp"
+            android:textStyle="bold" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="&#128276;"
-            android:textSize="22sp"
-            android:padding="6dp"
-            android:layout_marginEnd="4dp"/>
+        <ImageButton
+            android:id="@+id/btn_create"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Create a post"
+            android:padding="10dp"
+            android:src="@drawable/ic_social_add" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="&#9992;"
-            android:textSize="22sp"
-            android:textColor="#FFFFFF"
-            android:padding="6dp"/>
+        <ImageButton
+            android:id="@+id/btn_notifications"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Activity"
+            android:padding="10dp"
+            android:src="@drawable/ic_social_notifications" />
 
+        <ImageButton
+            android:id="@+id/btn_messages"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Messages"
+            android:padding="10dp"
+            android:src="@drawable/ic_social_send" />
     </LinearLayout>
 
-    <!-- Feed RecyclerView -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/social_border" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_insta"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="#0F0F17"/>
+        android:background="@color/social_background"
+        android:clipToPadding="false"
+        android:overScrollMode="never" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/social_border" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/social_surface"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/nav_home"
+            style="@style/SocialNavButton"
+            android:contentDescription="Home"
+            android:src="@drawable/ic_social_home" />
+
+        <ImageButton
+            android:id="@+id/nav_search"
+            style="@style/SocialNavButton"
+            android:contentDescription="Search"
+            android:src="@drawable/ic_social_search" />
+
+        <ImageButton
+            android:id="@+id/nav_create"
+            style="@style/SocialNavButton"
+            android:contentDescription="Create"
+            android:src="@drawable/ic_social_add" />
+
+        <ImageButton
+            android:id="@+id/nav_video"
+            style="@style/SocialNavButton"
+            android:contentDescription="Video"
+            android:src="@drawable/ic_social_video" />
+
+        <ImageButton
+            android:id="@+id/nav_profile"
+            style="@style/SocialNavButton"
+            android:contentDescription="Your profile"
+            android:src="@drawable/ic_social_profile" />
+    </LinearLayout>
 
 </LinearLayout>

@@ -19,12 +19,12 @@ public class BiometricsSensorService extends Service {
         createNotificationChannel();
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setContentTitle("Biometrics Recording")
-                .setContentText("Collecting IMU sensor data in background")
+                .setContentText("Recording IMU data for the active session")
                 .setSmallIcon(android.R.drawable.ic_menu_compass)
                 .setOngoing(true)
                 .build();
         startForeground(NOTIF_ID, notification);
-        return START_STICKY;
+        return START_NOT_STICKY;
     }
 
     @Override
@@ -38,7 +38,7 @@ public class BiometricsSensorService extends Service {
                     CHANNEL_ID,
                     "Sensor Collection",
                     NotificationManager.IMPORTANCE_LOW);
-            channel.setDescription("Keeps IMU sensor recording active in the background");
+            channel.setDescription("Shows when a behavioral biometrics session is recording");
             getSystemService(NotificationManager.class).createNotificationChannel(channel);
         }
     }

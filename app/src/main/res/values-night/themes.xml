@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.MonarchSoftware" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/monarch_green</item>
+        <item name="colorPrimaryVariant">@color/monarch_green_dark</item>
+        <item name="colorSecondary">@color/brand_gold</item>
+        <item name="colorAccent">@color/brand_gold</item>
+        <item name="colorOnPrimary">@color/monarch_green_dark</item>
+        <item name="colorSurface">@color/surface</item>
+        <item name="colorOnSurface">@color/text_primary</item>
+        <item name="android:colorBackground">@color/background</item>
+        <item name="android:windowBackground">@color/background</item>
+        <item name="android:statusBarColor">@color/header_surface</item>
+        <item name="android:navigationBarColor">@color/header_surface</item>
+        <item name="android:fontFamily">sans</item>
+        <item name="android:windowActionModeOverlay">true</item>
+    </style>
+</resources>

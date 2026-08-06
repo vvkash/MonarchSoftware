@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="monarch_green">#5AC0AD</color>
+    <color name="monarch_green_dark">#0B2B26</color>
+    <color name="monarch_green_medium">#3DA18F</color>
+    <color name="monarch_green_light">#72D4C1</color>
+    <color name="monarch_green_pale">#1B3A34</color>
+    <color name="monarch_green_card">#18322D</color>
+    <color name="brand_gold">#F2C66F</color>
+    <color name="brand_gold_soft">#3B301C</color>
+    <color name="brand_violet">#B7A2E2</color>
+    <color name="header_surface">#0B2B26</color>
+    <color name="header_on_surface">#F2FCF8</color>
+    <color name="splash_background">#071F1B</color>
+
+    <color name="off_white">#0E1715</color>
+    <color name="background">#0E1715</color>
+    <color name="surface">#17211F</color>
+    <color name="surface_variant">#202C29</color>
+    <color name="surface_elevated">#1C2825</color>
+
+    <color name="text_primary">#EDF5F2</color>
+    <color name="text_secondary">#B2BFBA</color>
+    <color name="text_hint">#899A94</color>
+    <color name="divider">#2D3B37</color>
+    <color name="border">#34443F</color>
+    <color name="card_stroke">#30413C</color>
+    <color name="pressed_overlay">#335AC0AD</color>
+    <color name="icon_tile_keystroke">#1C3B35</color>
+    <color name="icon_tile_biometrics">#252D42</color>
+    <color name="icon_tile_social">#352A41</color>
+
+    <color name="error">#FFB4AB</color>
+    <color name="error_bg">#4A2522</color>
+    <color name="success">#70D6AA</color>
+    <color name="warning">#FFB95C</color>
+
+    <color name="primary">#5AC0AD</color>
+    <color name="primary_variant">#0B2B26</color>
+    <color name="accent">#F2C66F</color>
+    <color name="accent_light">#F6D793</color>
+    <color name="on_primary">#07201B</color>
+    <color name="tag_bg">#1B3A34</color>
+    <color name="tag_text">#72D4C1</color>
+    <color name="register_bk_color">#0E1715</color>
+    <color name="whiteTextColor">#17211F</color>
+
+    <color name="social_background">#0B1110</color>
+    <color name="social_surface">#151D1B</color>
+    <color name="social_text">#F2F7F5</color>
+    <color name="social_text_secondary">#AAB6B2</color>
+    <color name="social_border">#2C3835</color>
+    <color name="social_pressed">#23302D</color>
+    <color name="social_accent">#B7A2E2</color>
+    <color name="social_verified">#62A9FF</color>
+    <color name="social_like">#FF6678</color>
+</resources>
