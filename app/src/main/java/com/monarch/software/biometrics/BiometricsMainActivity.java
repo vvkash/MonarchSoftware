@@ -1,13 +1,20 @@
 package com.monarch.software.biometrics;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.content.res.ColorStateList;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.Looper;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -20,14 +27,26 @@ import androidx.core.content.FileProvider;
 import com.monarch.software.R;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.OutputStreamWriter;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Locale;
 
+/**
+ * Session screen for the behavioural biometrics module.
+ *
+ * <p>All recording is delegated to {@link BiometricsSensorService} so a session keeps
+ * running when the app is backgrounded. This Activity only renders a low-rate preview
+ * and drives start/stop/share.
+ */
 public class BiometricsMainActivity extends AppCompatActivity
         implements SensorEventListener, View.OnClickListener {
+
+    /** Preview refresh only. The recorded stream is sampled at 100 Hz in the service. */
+    private static final int PREVIEW_PERIOD_US = 100_000;
+    private static final long PREVIEW_REFRESH_MS = 200L;
 
     private Button writeButton;
     private Button stopButton;
@@ -36,26 +55,56 @@ public class BiometricsMainActivity extends AppCompatActivity
     private TextView recordingStatus;
     private TextView recordingDetail;
     private View recordingIndicator;
-    private SensorManager sensorManager;
-    private boolean isRecording;
 
-    private float accelerometerX;
-    private float accelerometerY;
-    private float accelerometerZ;
-    private float gyroscopeX;
-    private float gyroscopeY;
-    private float gyroscopeZ;
-    private float magnetometerX;
-    private float magnetometerY;
-    private float magnetometerZ;
+    private SensorManager sensorManager;
+    private BiometricsSensorService recorder;
+    private boolean bound;
+    /**
+     * Tracks that {@link #bindService} was accepted, independently of whether
+     * {@link ServiceConnection#onServiceConnected} has fired yet. The binding must be
+     * released even if the connection never connected, or was dropped.
+     */
+    private boolean bindRequested;
+
+    private final float[] accelerometer = new float[3];
+    private final float[] gyroscope = new float[3];
+    private final float[] magnetometer = new float[3];
 
     private String applicationScenario;
-    private String sensorDataName;
     private String subject;
+    private String age;
+    private String gender;
+    private String email;
+    private int activityCode;
+
+    private final Handler uiHandler = new Handler(Looper.getMainLooper());
     private final DecimalFormat previewFormat = new DecimalFormat(
             "0.00", DecimalFormatSymbols.getInstance(Locale.US));
-    private final DecimalFormat csvFormat = new DecimalFormat(
-            "0.000000", DecimalFormatSymbols.getInstance(Locale.US));
+
+    private final Runnable previewTick = new Runnable() {
+        @Override
+        public void run() {
+            renderPreview();
+            uiHandler.postDelayed(this, PREVIEW_REFRESH_MS);
+        }
+    };
+
+    private final ServiceConnection connection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            recorder = ((BiometricsSensorService.LocalBinder) service).getService();
+            bound = true;
+            updateRecordingState();
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            // The connection stays registered; only unbindService() releases it.
+            recorder = null;
+            bound = false;
+            updateRecordingState();
+        }
+    };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -69,14 +118,12 @@ public class BiometricsMainActivity extends AppCompatActivity
             return;
         }
 
-        applicationScenario = extras.getString("5:", "");
         subject = extras.getString("1:", "");
-        sensorDataName = safeFileSegment(subject)
-                + "_" + safeFileSegment(extras.getString("2:", ""))
-                + "_" + safeFileSegment(extras.getString("3:", ""))
-                + "_" + safeFileSegment(extras.getString("4:", ""))
-                + "_" + safeFileSegment(applicationScenario)
-                + ".csv";
+        age = extras.getString("2:", "");
+        gender = extras.getString("3:", "");
+        email = extras.getString("4:", "");
+        applicationScenario = extras.getString("5:", "");
+        activityCode = scenarioToCode(applicationScenario);
 
         sensorPreview = findViewById(R.id.AT9);
         recordingStatus = findViewById(R.id.tv_recording_status);
@@ -90,56 +137,54 @@ public class BiometricsMainActivity extends AppCompatActivity
         shareButton.setOnClickListener(this);
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 
-        ensureCsvHeader();
-        updateRecordingState();
+        updateRecordingState();    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        bindRequested = true;
+        bindService(new Intent(this, BiometricsSensorService.class),
+                connection, Context.BIND_AUTO_CREATE);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        registerSensor(Sensor.TYPE_ACCELEROMETER, SensorManager.SENSOR_DELAY_UI);
-        registerSensor(Sensor.TYPE_GYROSCOPE, SensorManager.SENSOR_DELAY_NORMAL);
-        registerSensor(Sensor.TYPE_MAGNETIC_FIELD, SensorManager.SENSOR_DELAY_NORMAL);
+        registerPreview(Sensor.TYPE_ACCELEROMETER);
+        registerPreview(Sensor.TYPE_GYROSCOPE);
+        registerPreview(Sensor.TYPE_MAGNETIC_FIELD);
+        uiHandler.post(previewTick);
     }
 
     @Override
     protected void onPause() {
+        uiHandler.removeCallbacks(previewTick);
         sensorManager.unregisterListener(this);
-        if (isRecording) {
-            stopRecording(false);
-        }
+        // Recording deliberately continues in the foreground service.
         super.onPause();
     }
 
-    private void registerSensor(int sensorType, int delay) {
+    @Override
+    protected void onStop() {
+        if (bindRequested) {
+            unbindService(connection);
+            bindRequested = false;
+            bound = false;
+            recorder = null;
+        }
+        super.onStop();
+    }
+
+    private void registerPreview(int sensorType) {
         Sensor sensor = sensorManager.getDefaultSensor(sensorType);
         if (sensor != null) {
-            sensorManager.registerListener(this, sensor, delay);
+            sensorManager.registerListener(this, sensor, PREVIEW_PERIOD_US);
         }
     }
 
-    private void ensureCsvHeader() {
-        File output = new File(getFilesDir(), sensorDataName);
-        if (output.length() > 0) {
-            return;
-        }
-        writeCsv("TimeStamp, Acc_x, Acc_y, Acc_z, Gyr_x, Gyr_y, Gyr_z, "
-                + "Mag_x, Mag_y, Mag_z, Application Scenario, Subject\n");
-    }
-
-    private String safeFileSegment(String value) {
-        String cleaned = value.trim().replaceAll("[^A-Za-z0-9._-]", "_");
-        return cleaned.isEmpty() ? "unknown" : cleaned;
-    }
-
-    private void writeCsv(String message) {
-        try (FileOutputStream output = openFileOutput(sensorDataName, Context.MODE_APPEND);
-             OutputStreamWriter writer = new OutputStreamWriter(output, "utf-8")) {
-            writer.write(message);
-        } catch (Exception e) {
-            Toast.makeText(this, "Unable to store sensor data.", Toast.LENGTH_SHORT).show();
-        }
-    }
+    // ------------------------------------------------------------------
+    // Controls
+    // ------------------------------------------------------------------
 
     @Override
     public void onClick(View view) {
@@ -149,123 +194,146 @@ public class BiometricsMainActivity extends AppCompatActivity
         } else if (id == R.id.Button_Stop) {
             stopRecording(true);
         } else if (id == R.id.Button_Share) {
-            if (isRecording) {
+            if (isRecording()) {
                 stopRecording(false);
             }
-            shareCsv();
+            shareSession();
         }
     }
 
     private void startRecording() {
-        if (isRecording) {
+        if (isRecording()) {
             return;
         }
-        isRecording = true;
-        startService(new Intent(this, BiometricsSensorService.class));
+        Intent intent = new Intent(this, BiometricsSensorService.class)
+                .setAction(BiometricsSensorService.ACTION_START)
+                .putExtra(BiometricsSensorService.EXTRA_SUBJECT, subject)
+                .putExtra(BiometricsSensorService.EXTRA_ACTIVITY_CODE, activityCode)
+                .putExtra(BiometricsSensorService.EXTRA_AGE, age)
+                .putExtra(BiometricsSensorService.EXTRA_GENDER, gender)
+                .putExtra(BiometricsSensorService.EXTRA_EMAIL, email)
+                .putExtra(BiometricsSensorService.EXTRA_SCENARIO, applicationScenario);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            startForegroundService(intent);
+        } else {
+            startService(intent);
+        }
+        // onStart() already holds a BIND_AUTO_CREATE binding; binding again here would
+        // leak the ServiceConnection, since onStop() only unbinds once.
         updateRecordingState();
-        Toast.makeText(this, "Sensor recording started.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Recording started at 100 Hz.", Toast.LENGTH_SHORT).show();
     }
 
     private void stopRecording(boolean announce) {
-        if (!isRecording) {
+        if (!isRecording()) {
             return;
         }
-        isRecording = false;
-        stopService(new Intent(this, BiometricsSensorService.class));
+        // Flush and close synchronously through the binder first, so an immediately
+        // following export sees complete files; the intent only tears the service down.
+        recorder.finishSession();
+        startService(new Intent(this, BiometricsSensorService.class)
+                .setAction(BiometricsSensorService.ACTION_STOP));
         updateRecordingState();
         if (announce) {
             Toast.makeText(this, "Recording saved to this session.", Toast.LENGTH_SHORT).show();
         }
     }
 
+    private boolean isRecording() {
+        return bound && recorder != null && recorder.isRecording();
+    }
+
+    // ------------------------------------------------------------------
+    // Presentation
+    // ------------------------------------------------------------------
+
     private void updateRecordingState() {
-        writeButton.setEnabled(!isRecording);
-        stopButton.setEnabled(isRecording);
-        recordingStatus.setText(isRecording ? "Recording in progress" : "Ready to record");
-        recordingDetail.setText(isRecording
-                ? "Motion samples are being appended to the session CSV."
+        boolean recording = isRecording();
+        writeButton.setEnabled(!recording);
+        stopButton.setEnabled(recording);
+        recordingStatus.setText(recording ? "Recording in progress" : "Ready to record");
+        recordingDetail.setText(recording
+                ? "Writing HMOG-format CSVs at 100 Hz. Safe to leave this screen."
                 : "Sensor preview is active. No rows are being saved.");
         int indicatorColor = ContextCompat.getColor(
-                this, isRecording ? R.color.error : R.color.success);
+                this, recording ? R.color.error : R.color.success);
         recordingIndicator.setBackgroundTintList(ColorStateList.valueOf(indicatorColor));
     }
 
-    private void shareCsv() {
-        File file = new File(getFilesDir(), sensorDataName);
-        if (!file.exists() || file.length() == 0) {
-            Toast.makeText(this, "No session CSV is available yet.", Toast.LENGTH_LONG).show();
-            return;
+    private void renderPreview() {
+        StringBuilder text = new StringBuilder()
+                .append("ACCEL   ").append(axes(accelerometer))
+                .append("\nGYRO    ").append(axes(gyroscope))
+                .append("\nMAG     ").append(axes(magnetometer));
+
+        if (isRecording()) {
+            text.append("\n\nSAMPLES ").append(recorder.accelerometerSamples())
+                    .append("\nRATE    ")
+                    .append(previewFormat.format(recorder.measuredRateHz()))
+                    .append(" Hz (target 100)");
         }
 
-        android.net.Uri uri = FileProvider.getUriForFile(
-                this, "com.monarch.software.fileprovider", file);
-        Intent share = new Intent(Intent.ACTION_SEND);
-        share.setType("text/csv");
-        share.putExtra(Intent.EXTRA_STREAM, uri);
-        share.putExtra(Intent.EXTRA_SUBJECT, "Behavioral Biometrics Data - " + sensorDataName);
-        share.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-        startActivity(Intent.createChooser(share, "Export session CSV"));
+        sensorPreview.setText(text.toString());
+        updateRecordingState();
+    }
+
+    private String axes(float[] values) {
+        return "X " + previewFormat.format(values[0])
+                + "   Y " + previewFormat.format(values[1])
+                + "   Z " + previewFormat.format(values[2]);
     }
 
     @Override
     public void onSensorChanged(SensorEvent event) {
         switch (event.sensor.getType()) {
             case Sensor.TYPE_ACCELEROMETER:
-                accelerometerX = event.values[0];
-                accelerometerY = event.values[1];
-                accelerometerZ = event.values[2];
+                System.arraycopy(event.values, 0, accelerometer, 0, 3);
                 break;
             case Sensor.TYPE_GYROSCOPE:
-                gyroscopeX = event.values[0];
-                gyroscopeY = event.values[1];
-                gyroscopeZ = event.values[2];
+                System.arraycopy(event.values, 0, gyroscope, 0, 3);
                 break;
             case Sensor.TYPE_MAGNETIC_FIELD:
-                magnetometerX = event.values[0];
-                magnetometerY = event.values[1];
-                magnetometerZ = event.values[2];
+                System.arraycopy(event.values, 0, magnetometer, 0, 3);
                 break;
             default:
-                return;
+                break;
         }
-
-        long timestamp = System.currentTimeMillis();
-        sensorPreview.setText(
-                "TIMESTAMP  " + timestamp
-                        + "\n\nACCEL   " + axes(previewFormat, accelerometerX,
-                        accelerometerY, accelerometerZ)
-                        + "\nGYRO    " + axes(previewFormat, gyroscopeX,
-                        gyroscopeY, gyroscopeZ)
-                        + "\nMAG     " + axes(previewFormat, magnetometerX,
-                        magnetometerY, magnetometerZ));
-
-        if (isRecording) {
-            writeCsv(timestamp + ","
-                    + csvFormat.format(accelerometerX) + ","
-                    + csvFormat.format(accelerometerY) + ","
-                    + csvFormat.format(accelerometerZ) + ","
-                    + csvFormat.format(gyroscopeX) + ","
-                    + csvFormat.format(gyroscopeY) + ","
-                    + csvFormat.format(gyroscopeZ) + ","
-                    + csvFormat.format(magnetometerX) + ","
-                    + csvFormat.format(magnetometerY) + ","
-                    + csvFormat.format(magnetometerZ) + ","
-                    + csvValue(applicationScenario) + ","
-                    + csvValue(subject) + "\n");
-        }
-    }
-
-    private String csvValue(String value) {
-        return "\"" + value.replace("\"", "\"\"") + "\"";
-    }
-
-    private String axes(DecimalFormat format, float x, float y, float z) {
-        return "X " + format.format(x)
-                + "   Y " + format.format(y)
-                + "   Z " + format.format(z);
     }
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
+    }
+
+    // ------------------------------------------------------------------
+    // Export
+    // ------------------------------------------------------------------
+
+    private void shareSession() {
+        List<File> files = recorder == null ? new ArrayList<File>() : recorder.sessionFiles();
+        if (files.isEmpty()) {
+            Toast.makeText(this, "No session data is available yet.", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        ArrayList<Uri> uris = new ArrayList<>();
+        for (File file : files) {
+            uris.add(FileProvider.getUriForFile(
+                    this, "com.monarch.software.fileprovider", file));
+        }
+
+        Intent share = new Intent(Intent.ACTION_SEND_MULTIPLE)
+                .setType("text/csv")
+                .putParcelableArrayListExtra(Intent.EXTRA_STREAM, uris)
+                .putExtra(Intent.EXTRA_SUBJECT, "Behavioral Biometrics Data - " + subject)
+                .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        startActivity(Intent.createChooser(share, "Export session CSVs"));
+    }
+
+    /** Stable numeric activity id written into the HMOG activity column. */
+    private int scenarioToCode(String scenario) {
+        List<String> scenarios = Arrays.asList(getResources().getStringArray(R.array.scenarios));
+        int index = scenarios.indexOf(scenario);
+        return index < 0 ? 0 : index + 1;
     }
 }
