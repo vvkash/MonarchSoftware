@@ -11,6 +11,10 @@
     <!-- High-rate IMU sensors -->
     <uses-permission android:name="android.permission.HIGH_SAMPLING_RATE_SENSORS" />
 
+    <!-- Android 13+ suppresses the foreground-service notification without this,
+         leaving no visible indication that a recording is in progress. -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
     <!-- Vibration for alerts -->
     <uses-permission android:name="android.permission.VIBRATE" />
 

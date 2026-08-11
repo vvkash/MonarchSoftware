@@ -1,9 +1,11 @@
 package com.monarch.software.biometrics;
 
+import android.Manifest;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -47,6 +49,7 @@ public class BiometricsMainActivity extends AppCompatActivity
     /** Preview refresh only. The recorded stream is sampled at 100 Hz in the service. */
     private static final int PREVIEW_PERIOD_US = 100_000;
     private static final long PREVIEW_REFRESH_MS = 200L;
+    private static final int REQ_POST_NOTIFICATIONS = 1001;
 
     private Button writeButton;
     private Button stopButton;
@@ -137,7 +140,24 @@ public class BiometricsMainActivity extends AppCompatActivity
         shareButton.setOnClickListener(this);
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 
+        ensureNotificationPermission();
         updateRecordingState();    }
+
+    /**
+     * Without POST_NOTIFICATIONS on API 33+ the foreground-service notification is
+     * silently dropped, so a running session gives the operator no visible feedback.
+     * Recording still works if this is denied; only the indicator is lost.
+     */
+    private void ensureNotificationPermission() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
+            return;
+        }
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
+                != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{Manifest.permission.POST_NOTIFICATIONS},
+                    REQ_POST_NOTIFICATIONS);
+        }
+    }
 
     @Override
     protected void onStart() {
